@@ -1,0 +1,6 @@
+D:\Culinary_Inspiration\Culinary Inspiration\DataAccess\obj\Debug\net6.0\DataAccess.csproj.AssemblyReference.cache
+D:\Culinary_Inspiration\Culinary Inspiration\DataAccess\obj\Debug\net6.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\Culinary_Inspiration\Culinary Inspiration\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfoInputs.cache
+D:\Culinary_Inspiration\Culinary Inspiration\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfo.cs
+D:\Culinary_Inspiration\Culinary Inspiration\DataAccess\obj\Debug\net6.0\DataAccess.csproj.CoreCompileInputs.cache
+D:\Culinary_Inspiration\Culinary Inspiration\DataAccess\obj\Debug\net6.0\DataAccess.sourcelink.json
