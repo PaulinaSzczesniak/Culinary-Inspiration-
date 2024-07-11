@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    internal class Favorite
+    public class Favorite
     {
         public int Id { get; set; }
         public int UserId { get; set; }

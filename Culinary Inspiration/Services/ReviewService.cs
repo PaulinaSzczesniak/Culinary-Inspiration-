@@ -10,11 +10,16 @@ namespace Services
 {
     public class ReviewService : IReviewService
     {
-        private readonly ReviewRepository _reviewRepository;
+        private readonly IReviewRepository _reviewRepository;
 
         public ReviewService(IReviewRepository reviewRepository)
         {
             _reviewRepository = reviewRepository;
+        }
+
+        public async Task<Review> CreateReviewAsync(Review review)
+        {
+            return await _reviewRepository.AddAsync(review);
         }
 
         public async Task<Review> GetReviewByIdAsync(int id)
@@ -22,24 +27,24 @@ namespace Services
             return await _reviewRepository.GetByIdAsync(id);
         }
 
+        public async Task<IEnumerable<Review>> GetAllReviewsAsync()
+        {
+            return await _reviewRepository.GetAllAsync();
+        }
+
         public async Task<IEnumerable<Review>> GetReviewsByRecipeIdAsync(int recipeId)
         {
             return await _reviewRepository.GetByRecipeIdAsync(recipeId);
         }
 
-        public async Task<Review> CreateReviewAsync(Review review)
+        public async Task UpdateReviewAsync(Review review)
         {
-            return await _reviewRepository.CreateAsync(review);
-        }
-
-        public async Task<Review> UpdateReviewAsync(Review review)
-        {
-            return await _reviewRepository.UpdateAsync(review);
+            await _reviewRepository.UpdateAsync(review);
         }
 
         public async Task<bool> DeleteReviewAsync(int id)
         {
-            return await _reviewRepository.DeleteAsync(id);
+            return await _reviewRepository.RemoveAsync(id);
         }
     }
 }

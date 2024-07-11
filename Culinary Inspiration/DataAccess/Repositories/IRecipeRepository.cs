@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Models;
 
 namespace DataAccess.Repositories
 {
-    internal interface IRecipeRepository
+    public interface IRecipeRepository
     {
         Task<Recipe> GetByIdAsync(int id);
         Task<IEnumerable<Recipe>> GetAllAsync();

@@ -2429,6 +2429,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Culinary Inspiration >= 1.0.0",
       "DataAccess >= 1.0.0",
       "Domain >= 1.0.0"
     ]
@@ -2460,6 +2461,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "D:\\Culinary_Inspiration\\Culinary Inspiration\\Culinary Inspiration\\Culinary Inspiration.csproj": {
+              "projectPath": "D:\\Culinary_Inspiration\\Culinary Inspiration\\Culinary Inspiration\\Culinary Inspiration.csproj"
+            },
             "D:\\Culinary_Inspiration\\Culinary Inspiration\\DataAccess\\DataAccess.csproj": {
               "projectPath": "D:\\Culinary_Inspiration\\Culinary Inspiration\\DataAccess\\DataAccess.csproj"
             },

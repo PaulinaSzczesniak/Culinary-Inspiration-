@@ -9,10 +9,11 @@ namespace Services
 {
     public interface IReviewService
     {
-        Task<Review> GetReviewByIdAsync(int id);
-        Task<IEnumerable<Review>> GetReviewsByRecipeIdAsync(int recipeId);
         Task<Review> CreateReviewAsync(Review review);
-        Task<Review> UpdateReviewAsync(Review review);
+        Task<Review> GetReviewByIdAsync(int id);
+        Task<IEnumerable<Review>> GetAllReviewsAsync();
+        Task<IEnumerable<Review>> GetReviewsByRecipeIdAsync(int recipeId);
+        Task UpdateReviewAsync(Review review);
         Task<bool> DeleteReviewAsync(int id);
     }
 }

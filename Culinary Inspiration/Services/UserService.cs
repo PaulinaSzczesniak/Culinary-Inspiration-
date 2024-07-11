@@ -8,83 +8,51 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class UserService : IUserService
+    namespace Services
     {
-        private readonly IUserRepository _userRepository;
-
-        public UserService(IUserRepository userRepository)
+        public class UserService : IUserService
         {
-            _userRepository = userRepository;
-        }
+            private readonly IUserRepository _userRepository;
 
-        public async Task<User> CreateUserAsync(User user)
-        {
-            if (user == null)
+            public UserService(IUserRepository userRepository)
             {
-                throw new ArgumentNullException(nameof(user));
+                _userRepository = userRepository;
             }
 
-            user.PasswordHash = HashPassword(user.Password);
-            user.Password = null; // Clear plaintext password
-
-            return await _userRepository.AddAsync(user);
-        }
-
-        public async Task<User> GetUserByIdAsync(int id)
-        {
-            if (id <= 0)
+            public async Task<User> CreateUserAsync(User user)
             {
-                throw new ArgumentException("User ID must be greater than zero");
+                return await _userRepository.AddAsync(user);
             }
 
-            return await _userRepository.GetByIdAsync(id);
-        }
-
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
-        {
-            return await _userRepository.GetAllAsync();
-        }
-
-        public async Task UpdateUserAsync(User user)
-        {
-            if (user == null)
+            public async Task<User> GetUserByIdAsync(int id)
             {
-                throw new ArgumentNullException(nameof(user));
+                return await _userRepository.GetByIdAsync(id);
             }
 
-            var existingUser = await _userRepository.GetByIdAsync(user.Id);
-            if (existingUser == null)
+            public async Task<IEnumerable<User>> GetAllUsersAsync()
             {
-                throw new ArgumentException("User does not exist");
+                return await _userRepository.GetAllAsync();
             }
 
-            if (!string.IsNullOrEmpty(user.Password))
+            public async Task UpdateUserAsync(User user)
             {
-                user.PasswordHash = HashPassword(user.Password);
-                user.Password = null; // Clear plaintext password
+                await _userRepository.UpdateAsync(user);
             }
 
-            await _userRepository.UpdateAsync(user);
-        }
-
-        public async Task<bool> DeleteUserAsync(int id)
-        {
-            if (id <= 0)
+            public async Task<bool> DeleteUserAsync(int id)
             {
-                throw new ArgumentException("User ID must be greater than zero");
+                return await _userRepository.RemoveAsync(id);
             }
 
-            return await _userRepository.RemoveAsync(id);
-        }
-
-        private string HashPassword(string password)
-        {
-            if (string.IsNullOrEmpty(password))
+            public async Task<User> AuthenticateUserAsync(string email, string password)
             {
-                throw new ArgumentException("Password cannot be empty");
+                var user = await _userRepository.GetByEmailAsync(email);
+                if (user == null || user.PasswordHash != password)
+                {
+                    return null;
+                }
+                return user;
             }
-
-            return BCrypt.Net.BCrypt.HashPassword(password);
         }
     }
 }

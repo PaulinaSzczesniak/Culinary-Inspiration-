@@ -12,8 +12,11 @@ namespace Domain.Models
         public string Name { get; set; }
         public string Ingredients { get; set; }
         public string Instructions { get; set; }
-        public int CookingTime { get; set; } // in minutes
-        public string Difficulty { get; set; }
-        public string DietType { get; set; }
+        public int CookingTime { get; set; } // in minutes możliwe jako timespan
+        public string Difficulty { get; set; } //enum
+        public string DietType { get; set; } //enum 
+        public DateTime CreateDate { get; set; }
+        public DateTime? LastUpdateDate { get; set; }
+
     }
 }

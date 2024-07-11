@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Culinary Inspiration.props" />
+</Project>

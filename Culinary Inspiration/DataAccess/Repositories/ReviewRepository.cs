@@ -1,52 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using Domain.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.Repositories
 {
-    public class ReviewRepository : IReviewRepository
+    namespace DataAccess.Repositories
     {
-        private readonly IDbConnection _dbConnection;
-
-        public ReviewRepository(IDbConnection dbConnection)
+        public class ReviewRepository : IReviewRepository
         {
-            _dbConnection = dbConnection;
-        }
+            private readonly string _connectionString;
 
-        public async Task<Review> GetByIdAsync(int id)
-        {
-            var sql = "SELECT * FROM Reviews WHERE Id = @Id";
-            return await _dbConnection.QuerySingleOrDefaultAsync<Review>(sql, new { Id = id });
-        }
+            public ReviewRepository(IConfiguration configuration)
+            {
+                _connectionString = configuration.GetConnectionString("DefaultConnection");
+            }
 
-        public async Task<IEnumerable<Review>> GetByRecipeIdAsync(int recipeId)
-        {
-            var sql = "SELECT * FROM Reviews WHERE RecipeId = @RecipeId";
-            return await _dbConnection.QueryAsync<Review>(sql, new { RecipeId = recipeId });
-        }
+            private IDbConnection CreateConnection()
+            {
+                return new SqlConnection(_connectionString);
+            }
 
-        public async Task<Review> CreateAsync(Review review)
-        {
-            var sql = "INSERT INTO Reviews (RecipeId, UserId, Rating, Comment) VALUES (@RecipeId, @UserId, @Rating, @Comment); SELECT CAST(SCOPE_IDENTITY() as int)";
-            var id = await _dbConnection.QuerySingleAsync<int>(sql, review);
-            review.Id = id;
-            return review;
-        }
+            public async Task<Review> AddAsync(Review review)
+            {
+                const string query = @"
+                INSERT INTO Reviews (RecipeId, UserId, Rating, Comment)
+                OUTPUT INSERTED.*
+                VALUES (@RecipeId, @UserId, @Rating, @Comment)";
 
-        public async Task<Review> UpdateAsync(Review review)
-        {
-            var sql = "UPDATE Reviews SET RecipeId = @RecipeId, UserId = @UserId, Rating = @Rating, Comment = @Comment WHERE Id = @Id";
-            await _dbConnection.ExecuteAsync(sql, review);
-            return review;
-        }
+                using (var connection = CreateConnection())
+                {
+                    return await connection.QuerySingleAsync<Review>(query, review);
+                }
+            }
 
-        public async Task<bool> DeleteAsync(int id)
-        {
-            var sql = "DELETE FROM Reviews WHERE Id = @Id";
-            var affectedRows = await _dbConnection.ExecuteAsync(sql, new { Id = id });
-            return affectedRows > 0;
+            public async Task<Review> GetByIdAsync(int id)
+            {
+                const string query = "SELECT * FROM Reviews WHERE Id = @Id";
+
+                using (var connection = CreateConnection())
+                {
+                    return await connection.QuerySingleOrDefaultAsync<Review>(query, new { Id = id });
+                }
+            }
+
+            public async Task<IEnumerable<Review>> GetAllAsync()
+            {
+                const string query = "SELECT * FROM Reviews";
+
+                using (var connection = CreateConnection())
+                {
+                    return await connection.QueryAsync<Review>(query);
+                }
+            }
+
+            public async Task<IEnumerable<Review>> GetByRecipeIdAsync(int recipeId)
+            {
+                const string query = "SELECT * FROM Reviews WHERE RecipeId = @RecipeId";
+
+                using (var connection = CreateConnection())
+                {
+                    return await connection.QueryAsync<Review>(query, new { RecipeId = recipeId });
+                }
+            }
+
+            public async Task UpdateAsync(Review review)
+            {
+                const string query = @"
+                UPDATE Reviews
+                SET RecipeId = @RecipeId,
+                    UserId = @UserId,
+                    Rating = @Rating,
+                    Comment = @Comment
+                WHERE Id = @Id";
+
+                using (var connection = CreateConnection())
+                {
+                    await connection.ExecuteAsync(query, review);
+                }
+            }
+
+            public async Task<bool> RemoveAsync(int id)
+            {
+                const string query = "DELETE FROM Reviews WHERE Id = @Id";
+
+                using (var connection = CreateConnection())
+                {
+                    var affectedRows = await connection.ExecuteAsync(query, new { Id = id });
+                    return affectedRows > 0;
+                }
+            }
         }
     }
 }

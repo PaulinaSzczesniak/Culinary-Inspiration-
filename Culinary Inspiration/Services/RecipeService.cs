@@ -12,7 +12,7 @@ namespace Services
     {
         private readonly IRecipeRepository _recipeRepository;
 
-        public RecipeService(RecipeRepository recipeRepository)
+        public RecipeService(IRecipeRepository recipeRepository)
         {
             _recipeRepository = recipeRepository;
         }

@@ -1,6 +1,25 @@
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Culinary Inspiration.deps.json
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Culinary Inspiration.runtimeconfig.json
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\appsettings.Development.json
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\appsettings.json
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Culinary Inspiration.exe
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Services.deps.json
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Services.dll
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Services.pdb
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Culinary Inspiration.dll
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\DataAccess.dll
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Domain.dll
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Culinary Inspiration.pdb
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\DataAccess.pdb
+D:\Culinary_Inspiration\Culinary Inspiration\Services\bin\Debug\net6.0\Domain.pdb
 D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.csproj.AssemblyReference.cache
 D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.GeneratedMSBuildEditorConfig.editorconfig
 D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.AssemblyInfoInputs.cache
 D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.AssemblyInfo.cs
 D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.csproj.CoreCompileInputs.cache
 D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.sourcelink.json
+D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.csproj.CopyComplete
+D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.dll
+D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\refint\Services.dll
+D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\Services.pdb
+D:\Culinary_Inspiration\Culinary Inspiration\Services\obj\Debug\net6.0\ref\Services.dll
