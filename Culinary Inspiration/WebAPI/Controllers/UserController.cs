@@ -1,6 +1,7 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -18,8 +19,16 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] User user)
         {
-            var createdUser = await _userService.CreateUserAsync(user);
-            return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
+            try
+            {
+                var createdUser = await _userService.CreateUserAsync(user);
+                return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
+            }
+            catch (Exception ex)
+            {
+                // Obsługa błędu - zwróć odpowiedni status HTTP
+                return BadRequest($"Failed to create user: {ex.Message}");
+            }
         }
 
         [HttpGet("{id}")]

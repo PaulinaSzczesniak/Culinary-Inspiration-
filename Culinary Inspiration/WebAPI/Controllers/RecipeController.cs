@@ -1,6 +1,7 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -34,21 +35,26 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRecipe([FromBody] Recipe recipe)
+        public async Task<IActionResult> CreateRecipe([FromBody] Recipe recipeDto)
         {
-            var createdRecipe = await _recipeService.CreateRecipeAsync(recipe);
+            if (recipeDto == null)
+            {
+                return BadRequest("Recipe data is required.");
+            }
+
+            var createdRecipe = await _recipeService.CreateRecipeAsync(recipeDto);
             return CreatedAtAction(nameof(GetRecipeById), new { id = createdRecipe.Id }, createdRecipe);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRecipe(int id, [FromBody] Recipe recipe)
+        public async Task<IActionResult> UpdateRecipe(int id, [FromBody] Recipe recipeDto)
         {
-            if (id != recipe.Id)
+            if (id != recipeDto.Id)
             {
                 return BadRequest();
             }
 
-            await _recipeService.UpdateRecipeAsync(recipe);
+            await _recipeService.UpdateRecipeAsync(recipeDto);
             return NoContent();
         }
 

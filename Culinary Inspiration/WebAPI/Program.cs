@@ -16,6 +16,16 @@ namespace WebAPI
             // Dodanie serwisów
             builder.Services.AddControllers();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
             // Dodanie serwisów aplikacyjnych
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRecipeService, RecipeService>();
@@ -49,7 +59,7 @@ namespace WebAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors("AllowAll");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
