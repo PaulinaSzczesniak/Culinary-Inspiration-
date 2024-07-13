@@ -1,0 +1,57 @@
+CREATE DATABASE Culinary_Inspiration;
+GO
+
+USE Culinary_Inspiration;
+GO
+
+-- Tabela Users
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    UserName NVARCHAR(255) NOT NULL
+);
+GO
+
+-- Tabela Recipes
+CREATE TABLE Recipes (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    Ingredients NVARCHAR(MAX) NOT NULL,
+    Instructions NVARCHAR(MAX) NOT NULL,
+    CookingTime INT NOT NULL,
+    Difficulty NVARCHAR(10) NOT NULL CHECK (Difficulty IN ('Easy', 'Medium', 'Hard')),
+    DietType NVARCHAR(10) NOT NULL CHECK (DietType IN ('Normal', 'Dietetic', 'Vegan')),
+    CreateDate DATETIME NOT NULL DEFAULT GETDATE(),
+    LastUpdateDate DATETIME NULL
+);
+GO
+
+-- Tabela Reviews
+CREATE TABLE Reviews (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    RecipeId INT NOT NULL,
+    UserId INT NOT NULL,
+    Rating INT NOT NULL CHECK (Rating BETWEEN 1 AND 5),
+    Comment NVARCHAR(MAX) NULL,
+    FOREIGN KEY (RecipeId) REFERENCES Recipes(Id) ON DELETE CASCADE,
+    FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE
+);
+GO
+
+-- Tabela Favorites
+CREATE TABLE Favorites (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    RecipeId INT NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE,
+    FOREIGN KEY (RecipeId) REFERENCES Recipes(Id) ON DELETE CASCADE
+);
+GO
+
+-- Predefiniowani użytkownicy
+INSERT INTO Users (Email, PasswordHash, UserName)
+VALUES 
+('user1@example.com', 'hashedpassword1', 'user1'),
+('user2@example.com', 'hashedpassword2', 'user2');
+GO
