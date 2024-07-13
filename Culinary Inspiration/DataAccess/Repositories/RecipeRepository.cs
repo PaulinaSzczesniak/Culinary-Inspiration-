@@ -53,5 +53,15 @@ namespace DataAccess.Repositories
             var affectedRows = await _dbConnection.ExecuteAsync(sql, new { Id = id });
             return affectedRows > 0;
         }
+        public async Task<Review> AddReviewAsync(Review review)
+        {
+            var sql =
+                "INSERT INTO Reviews (RecipeId, UserId, Rating, Comment) " +
+                "VALUES (@RecipeId, @UserId, @Rating, @Comment); " +
+                "SELECT CAST(SCOPE_IDENTITY() as int)";
+            var id = await _dbConnection.QuerySingleAsync<int>(sql, review);
+            review.Id = id;
+            return review;
+        }
     }
 }

@@ -41,5 +41,15 @@ namespace Services
         {
             return await _recipeRepository.DeleteAsync(id);
         }
+        public async Task<Review> AddReviewAsync(Review review)
+        {
+            if (review.Rating < 1 || review.Rating > 5)
+            {
+                throw new ArgumentException("Rating must be between 1 and 5.");
+            }
+
+           return await _recipeRepository.AddReviewAsync(review);
+
+        }
     }
 }

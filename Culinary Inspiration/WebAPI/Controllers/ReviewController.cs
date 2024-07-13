@@ -14,6 +14,17 @@ namespace WebAPI.Controllers
         {
             _reviewService = reviewService;
         }
+        [HttpPost]
+        public async Task<IActionResult> AddReview([FromBody] Review review)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var addedReview = await _reviewService.CreateReviewAsync(review);
+            return CreatedAtAction(nameof(GetReviewById), new { id = addedReview.Id }, addedReview);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllReviews()
@@ -33,12 +44,13 @@ namespace WebAPI.Controllers
             return Ok(review);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateReview([FromBody] Review review)
+        [HttpGet("recipe/{recipeId}")]
+        public async Task<IActionResult> GetReviewsByRecipeId(int recipeId)
         {
-            var createdReview = await _reviewService.CreateReviewAsync(review);
-            return CreatedAtAction(nameof(GetReviewById), new { id = createdReview.Id }, createdReview);
+            var reviews = await _reviewService.GetReviewsByRecipeIdAsync(recipeId);
+            return Ok(reviews);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateReview(int id, [FromBody] Review review)

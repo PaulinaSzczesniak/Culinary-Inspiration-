@@ -77,3 +77,5 @@ D:\Culinary_Inspiration\Culinary Inspiration\WebAPI\obj\Debug\net6.0\refint\WebA
 D:\Culinary_Inspiration\Culinary Inspiration\WebAPI\obj\Debug\net6.0\WebAPI.pdb
 D:\Culinary_Inspiration\Culinary Inspiration\WebAPI\obj\Debug\net6.0\WebAPI.genruntimeconfig.cache
 D:\Culinary_Inspiration\Culinary Inspiration\WebAPI\obj\Debug\net6.0\ref\WebAPI.dll
+D:\Culinary_Inspiration\Culinary Inspiration\WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Culinary_Inspiration\Culinary Inspiration\WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll

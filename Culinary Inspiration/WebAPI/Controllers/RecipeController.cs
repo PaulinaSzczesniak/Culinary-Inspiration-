@@ -68,5 +68,19 @@ namespace WebAPI.Controllers
             }
             return NoContent();
         }
+        [HttpPost("{recipeId}/reviews")]
+        public async Task<IActionResult> AddReview(int recipeId, [FromBody] Review review)
+        {
+            try
+            {
+                review.RecipeId = recipeId; // Przypisanie recipeId do recenzji
+                var addedReview = await _recipeService.AddReviewAsync(review);
+                return CreatedAtAction(nameof(GetRecipeById), new { id = recipeId }, addedReview);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

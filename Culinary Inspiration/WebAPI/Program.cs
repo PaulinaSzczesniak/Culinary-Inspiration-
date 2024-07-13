@@ -38,7 +38,7 @@ namespace WebAPI
             builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
             builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 
-            // Dodanie po³¹czenia do bazy danych
+            // Dodanie po??czenia do bazy danych
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionString));
 

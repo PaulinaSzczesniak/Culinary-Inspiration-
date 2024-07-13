@@ -17,7 +17,7 @@ namespace Domain.Models
         public string DietType { get; set; } 
         public DateTime CreateDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
-
+        public List<Review> Reviews { get; set; }
     }
 
     public enum DifficultyType

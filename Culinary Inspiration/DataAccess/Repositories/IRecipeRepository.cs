@@ -14,5 +14,6 @@ namespace DataAccess.Repositories
         Task<Recipe> CreateAsync(Recipe recipe);
         Task<Recipe> UpdateAsync(Recipe recipe);
         Task<bool> DeleteAsync(int id);
+        Task<Review> AddReviewAsync(Review review);
     }
 }

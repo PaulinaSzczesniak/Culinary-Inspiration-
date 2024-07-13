@@ -14,5 +14,6 @@ namespace Services
         Task<Recipe> CreateRecipeAsync(Recipe recipe);
         Task<Recipe> UpdateRecipeAsync(Recipe recipe);
         Task<bool> DeleteRecipeAsync(int id);
+        Task<Review> AddReviewAsync(Review review);
     }
 }
